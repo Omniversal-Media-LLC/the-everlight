@@ -48,3 +48,15 @@ Update with this configuration:
 ```
 
 Restart Claude and you should see the tools become available. 
+
+## Integrating Aether-Core Data Sources
+
+The EverLight worker can pull context from Cloudflare services by defining additional tools in `src/index.ts` and corresponding bindings in `wrangler.jsonc`.
+
+Supported integrations:
+
+- **R2** – retrieve objects using the `r2_get` tool.
+- **D1** – run SQL statements via the `db_query` tool.
+- **Vectorize** – perform similarity searches with the `vector_search` tool.
+
+Update the bindings in `wrangler.jsonc` to match your own bucket, database, and index names.
