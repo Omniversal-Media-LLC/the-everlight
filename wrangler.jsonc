@@ -14,15 +14,33 @@
 			"tag": "v1"
 		}
 	],
-	"durable_objects": {
-		"bindings": [
-			{
-				"class_name": "MyMCP",
-				"name": "MCP_OBJECT"
-			}
-		]
-	},
-	"observability": {
-		"enabled": true
-	}
+        "durable_objects": {
+                "bindings": [
+                        {
+                                "class_name": "MyMCP",
+                                "name": "MCP_OBJECT"
+                        }
+                ]
+        },
+        "r2_buckets": [
+                {
+                        "binding": "BUCKET",
+                        "bucket_name": "aether-core"
+                }
+        ],
+        "d1_databases": [
+                {
+                        "binding": "DB",
+                        "database_name": "aether-db"
+                }
+        ],
+        "vectorize": [
+                {
+                        "binding": "VECTORIZE",
+                        "index_name": "aether-index"
+                }
+        ],
+        "observability": {
+                "enabled": true
+        }
 }

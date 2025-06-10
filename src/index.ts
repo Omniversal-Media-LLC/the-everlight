@@ -9,7 +9,7 @@ export class MyMCP extends McpAgent {
 		version: "1.0.0",
 	});
 
-	async init() {
+        async init() {
 		// Simple addition tool
 		this.server.tool(
 			"add",
@@ -20,14 +20,14 @@ export class MyMCP extends McpAgent {
 		);
 
 		// Calculator tool with multiple operations
-		this.server.tool(
-			"calculate",
-			{
-				operation: z.enum(["add", "subtract", "multiply", "divide"]),
-				a: z.number(),
-				b: z.number(),
-			},
-			async ({ operation, a, b }) => {
+                this.server.tool(
+                        "calculate",
+                        {
+                                operation: z.enum(["add", "subtract", "multiply", "divide"]),
+                                a: z.number(),
+                                b: z.number(),
+                        },
+                        async ({ operation, a, b }) => {
 				let result: number;
 				switch (operation) {
 					case "add":
@@ -52,10 +52,44 @@ export class MyMCP extends McpAgent {
 						result = a / b;
 						break;
 				}
-				return { content: [{ type: "text", text: String(result) }] };
-			}
-		);
-	}
+                                return { content: [{ type: "text", text: String(result) }] };
+                        }
+                );
+
+                // Retrieve a text file from Cloudflare R2
+                this.server.tool(
+                        "r2_get",
+                        { key: z.string() },
+                        async ({ key }) => {
+                                const obj = await this.env.BUCKET.get(key);
+                                if (!obj) return { content: [{ type: "text", text: "Not found" }] };
+                                const text = await obj.text();
+                                return { content: [{ type: "text", text }] };
+                        }
+                );
+
+                // Execute a SQL query against Cloudflare D1
+                this.server.tool(
+                        "db_query",
+                        { sql: z.string() },
+                        async ({ sql }) => {
+                                const result = await this.env.DB.prepare(sql).all();
+                                return { content: [{ type: "json", json: result }] };
+                        }
+                );
+
+                // Search embeddings via Cloudflare Vectorize
+                this.server.tool(
+                        "vector_search",
+                        { query: z.string(), topK: z.number().optional() },
+                        async ({ query, topK = 3 }) => {
+                                const matches = await this.env.VECTORIZE.query(query, {
+                                        topK,
+                                });
+                                return { content: [{ type: "json", json: matches }] };
+                        }
+                );
+        }
 }
 
 export default {
