@@ -25,19 +25,26 @@
         "r2_buckets": [
                 {
                         "binding": "BUCKET",
-                        "bucket_name": "aether-core"
+                        "bucket_name": "omniversal-vip"
+                }
+        ],
+        "hyperdrive": [
+                {
+                        "binding": "HYPERDRIVE",
+                        "id": "3e5c7ebed61e492990cafe73dc1ac8dd"
                 }
         ],
         "d1_databases": [
                 {
-                        "binding": "DB",
+                        "binding": "D1",
                         "database_name": "aether-db"
+                        "id": "e654f47a-2c83-4d6e-8767-6ae72f075426"
                 }
         ],
         "vectorize": [
                 {
                         "binding": "VECTORIZE",
-                        "index_name": "aether-index"
+                        "index_name": "autorag-everlight_index"
                 }
         ],
         "observability": {
