@@ -44,7 +44,7 @@
         "vectorize": [
                 {
                         "binding": "VECTORIZE",
-                        "index_name": "autorag-everlight_index"
+                        "index_name": "autorag-everlight_autorag"
                 }
         ],
         "observability": {
