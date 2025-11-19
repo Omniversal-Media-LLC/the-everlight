@@ -37,8 +37,7 @@
         "d1_databases": [
                 {
                         "binding": "D1",
-                        "database_name": "aether-db",
-                        "id": "e654f47a-2c83-4d6e-8767-6ae72f075426"
+                        "database_id": "e654f47a-2c83-4d6e-8767-6ae72f075426"
                 }
         ],
         "vectorize": [
